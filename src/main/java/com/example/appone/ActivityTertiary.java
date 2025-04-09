@@ -7,9 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appone.adapters.BasicAdapter;
 import com.example.appone.clases.Color;
+import com.example.appone.tertiarydata.ColorAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityTertiary extends AppCompatActivity {
 
@@ -24,20 +30,21 @@ public class ActivityTertiary extends AppCompatActivity {
             return insets;
         });
 
-
-        Color color1 = new Color("Rojo", "#FF0000");
-        Color color2 = new Color("Verde", "#00FF00");
-        Color color3 = new Color("Azul", "#0000FF");
-        Color color4 = new Color("Amarillo", "#FFFF00");
-        Color color5 = new Color("Cian", "#00FFFF");
-        Color color6 = new Color("Magenta", "#FF00FF");
-        Color color7 = new Color("Naranja", "#FFA500");
-        Color color8 = new Color("Gris", "#808080");
-        Color color9 = new Color("Negro", "#000000");
-        Color color10 = new Color("Blanco", "#FFFFFF");
-
+        List<Color> colorList = new ArrayList<>();
+        colorList.add(new Color("Rojo", "#FF0000"));
+        colorList.add(new Color("Verde", "#00FF00"));
+        colorList.add(new Color("Azul", "#0000FF"));
+        colorList.add(new Color("Amarillo", "#FFFF00"));
+        colorList.add(new Color("Cian", "#00FFFF"));
+        colorList.add(new Color("Magenta", "#FF00FF"));
+        colorList.add(new Color("Naranja", "#FFA500"));
+        colorList.add(new Color("Gris", "#808080"));
+        colorList.add(new Color("Negro", "#000000"));
+        colorList.add(new Color("Blanco", "#FFFFFF"));
 
         RecyclerView recycler_colors = findViewById(R.id.recycler_colors);
-
+        recycler_colors.setLayoutManager(new LinearLayoutManager(this));
+        ColorAdapter adapter = new ColorAdapter(colorList);
+        recycler_colors.setAdapter(adapter);
     }
 }
