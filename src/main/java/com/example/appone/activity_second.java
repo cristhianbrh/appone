@@ -40,16 +40,12 @@ public class activity_second extends AppCompatActivity {
             return insets;
         });
 
-        List<PokemonData> data = new ArrayList<>();
-        data.add(new PokemonData("name", "dasdadsa"));
-
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://pokeapi.co/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(PokemonService.class);
-        Call<PokemonResponse> listDataCall = service.getColors(20,1);
+        Call<PokemonResponse> listDataCall = service.getPokemons(20,1);
         listDataCall.enqueue(new Callback<PokemonResponse>() {
             @Override
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {

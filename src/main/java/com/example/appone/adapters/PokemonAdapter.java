@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appone.DetallePokemonActivity;
 import com.example.appone.R;
 import com.example.appone.entities.PokemonData;
 
@@ -38,6 +39,13 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         PokemonData pokemon = data.get(position);
         TextView tvNamepokemon = holder.itemView.findViewById(R.id.namepokemon);
         tvNamepokemon.setText(pokemon.name);
+
+        tvNamepokemon.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetallePokemonActivity.class);
+            intent.putExtra("name", pokemon.name);
+            intent.putExtra("url", pokemon.url);
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     @Override
