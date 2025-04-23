@@ -10,8 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appone.adapters.BasicAdapter;
-import com.example.appone.clases.Contact;
+
+import com.example.appone.adapters.PokemonAdapter;
+import com.example.appone.entities.PokemonData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,19 +31,13 @@ public class activity_second extends AppCompatActivity {
             return insets;
         });
 
-        List<Contact> data = new ArrayList<Contact>();
-        data.add(new Contact("Cristhian Alexander Bautista Ruiz", "92129321"));
-        data.add(new Contact("Addmer Local Lol Ruiz", "943656546"));
+        List<PokemonData> data = new ArrayList<>();
+        data.add(new PokemonData("name", "dasdadsa"));
 
-        data.add(new Contact("María Flor Ruiz Julca", "92312443"));
 
-        data.add(new Contact("Lopdsad Alejandro Ruiz", "9253543"));
-
-        data.add(new Contact("Alex Alexander Bautista Ruiz", "9867764"));
-
-        RecyclerView rvBasic = findViewById(R.id.rvBasic);
+        RecyclerView rvBasic = findViewById(R.id.rvPokemonList);
         rvBasic.setLayoutManager(new LinearLayoutManager(this));
-        BasicAdapter adapter = new BasicAdapter(data);
+        PokemonAdapter adapter = new PokemonAdapter(data);
         rvBasic.setAdapter(adapter);
     }
 }
