@@ -1,6 +1,6 @@
 package com.example.appone.services;
 
-import com.example.appone.entities.PokemonData;
+import com.example.appone.entities.PokemonResponse;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import retrofit2.http.Query;
 
 public interface PokemonService {
     @GET("/api/v2/pokemon")
-    Call<List<PokemonData>>  getColors(@Query("limit") int limit, @Query("offset") int page);
+    Call<PokemonResponse>  getColors(@Query("limit") int limit, @Query("offset") int offset);
 
 }

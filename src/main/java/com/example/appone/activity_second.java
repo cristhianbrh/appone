@@ -13,12 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appone.adapters.PokemonAdapter;
 import com.example.appone.entities.PokemonData;
+import com.example.appone.entities.PokemonResponse;
+import com.example.appone.services.PokemonService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class activity_second extends AppCompatActivity {
+    PokemonService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +44,38 @@ public class activity_second extends AppCompatActivity {
         data.add(new PokemonData("name", "dasdadsa"));
 
 
-        RecyclerView rvBasic = findViewById(R.id.rvPokemonList);
-        rvBasic.setLayoutManager(new LinearLayoutManager(this));
-        PokemonAdapter adapter = new PokemonAdapter(data);
-        rvBasic.setAdapter(adapter);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://pokeapi.co/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        service = retrofit.create(PokemonService.class);
+        Call<PokemonResponse> listDataCall = service.getColors(20,1);
+        listDataCall.enqueue(new Callback<PokemonResponse>() {
+            @Override
+            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<PokemonData> data = response.body().getResults();
+
+                    RecyclerView rvBasic = findViewById(R.id.rvPokemonList);
+                    rvBasic.setLayoutManager(new LinearLayoutManager(activity_second.this));
+                    PokemonAdapter adapter = new PokemonAdapter(data);
+                    rvBasic.setAdapter(adapter);
+                } else {
+                    System.out.println("Error en la respuesta: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PokemonResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+
+
+        //RecyclerView rvBasic = findViewById(R.id.rvPokemonList);
+        //rvBasic.setLayoutManager(new LinearLayoutManager(this));
+        //PokemonAdapter adapter = new PokemonAdapter(listData);
+        //rvBasic.setAdapter(adapter);
     }
 }

@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class PokemonData {
     //@SerializedName("name")
-    public String nombre;
+    public String name;
 
     //@SerializedName("url")
     public String url;
 
-    public PokemonData(String nombre, String url) {
-        this.nombre = nombre;
+    public PokemonData(String name, String url) {
+        this.name = name;
         this.url = url;
     }
 }
