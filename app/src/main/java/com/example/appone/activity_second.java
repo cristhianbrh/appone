@@ -34,8 +34,7 @@ public class activity_second extends AppCompatActivity {
     int currentPage = 1;
     List<PokemonData> data = new ArrayList<>();
     PokemonAdapter adapter;
-    boolean isLoading = false;
-    boolean isLastPage = false;
+    boolean isLoading = false, isLastPage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

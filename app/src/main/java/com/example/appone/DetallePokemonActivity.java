@@ -1,6 +1,8 @@
 package com.example.appone;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetallePokemonActivity extends AppCompatActivity {
     PokemonService service;
+    Button btnView;
+    Button btnAppend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,10 @@ public class DetallePokemonActivity extends AppCompatActivity {
 
         String name = getIntent().getStringExtra("name");
         String url = getIntent().getStringExtra("url");
+        btnView = findViewById(R.id.btnViewUbic);
+        btnAppend = findViewById(R.id.btnAddUbi);
+
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://pokeapi.co/")
@@ -86,5 +94,15 @@ public class DetallePokemonActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+
+        //TODO: ADDMER
+        btnAppend.setOnClickListener(v -> {
+            Intent intent = new Intent(DetallePokemonActivity.this, AppendUbication.class);
+            intent.putExtra("name", name);
+            startActivity(intent);
+            //intent.putExtra("url", pokemon.url);
+            //holder.itemView.getContext().startActivity(intent);
+        });
+
     }
 }
